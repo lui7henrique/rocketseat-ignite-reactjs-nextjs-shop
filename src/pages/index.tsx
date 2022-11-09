@@ -14,6 +14,7 @@ import {
 } from "styles/pages/home";
 
 import "keen-slider/keen-slider.min.css";
+import { formatCurrency } from "utils/currency/format";
 
 interface HomeProps {
   products: {
@@ -62,15 +63,17 @@ export const getStaticProps: GetStaticProps = async () => {
     expand: ["data.default_price"],
   });
 
-  const products = response.data.map(async (product) => {
+  const products = response.data.map((product) => {
     const { unit_amount } = product.default_price as Stripe.Price;
+    const price = formatCurrency(unit_amount ? unit_amount / 100 : 0);
+
     const imageUrl = product.images[0];
 
     return {
       id: product.id,
       name: product.name,
       imageUrl,
-      price: unit_amount ? unit_amount / 100 : 0,
+      price,
     };
   });
 
