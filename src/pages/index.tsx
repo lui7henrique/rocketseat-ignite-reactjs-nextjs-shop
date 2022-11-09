@@ -1,6 +1,6 @@
 import { useKeenSlider } from "keen-slider/react";
 import Stripe from "stripe";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 
 import { stripe } from "lib/stripe";
 
@@ -57,23 +57,25 @@ export default function Home(props: HomeProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await stripe.products.list({
     expand: ["data.default_price"],
   });
 
-  const products = response.data.map((product) => {
+  const products = response.data.map(async (product) => {
     const { unit_amount } = product.default_price as Stripe.Price;
+    const imageUrl = product.images[0];
 
     return {
       id: product.id,
       name: product.name,
-      imageUrl: product.images[0],
+      imageUrl,
       price: unit_amount ? unit_amount / 100 : 0,
     };
   });
 
   return {
     props: { products },
+    revalidate: 60 * 60 * 6, // 6 hours
   };
 };
