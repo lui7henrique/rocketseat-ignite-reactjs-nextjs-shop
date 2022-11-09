@@ -3,7 +3,6 @@ import { styled } from "styles";
 
 export const HomeContainer = styled("main", {
   display: "flex",
-  gap: "3rem",
 
   width: "100%",
 
@@ -14,9 +13,8 @@ export const HomeContainer = styled("main", {
 export const Product = styled("a", {
   background: "linear-gradient(180deg, #1EA483 0%, #7465D4 100%)",
   borderRadius: "4px",
-  padding: "0.25rem",
-  cursor: "pointer",
 
+  cursor: "pointer",
   position: "relative",
 
   display: "flex",
