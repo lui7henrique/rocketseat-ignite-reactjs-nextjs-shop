@@ -1,30 +1,60 @@
-import { styled } from "../styles";
+import {
+  HomeContainer,
+  Product,
+  ProductFooter,
+  ProductImg,
+  ProductPrice,
+  ProductTitle,
+} from "styles/pages/home";
 
-const Button = styled("button", {
-  backgroundColor: "$rocketseat",
-  borderRadius: 4,
-  border: 0,
-  padding: "4px 8px",
-
-  transition: "all 0.2s ease-in-out",
-  cursor: "pointer",
-
-  span: {
-    fontWeight: "bold",
-  },
-
-  "&:hover": {
-    filter: "brightness(0.8)",
-  },
-});
+import camiseta2 from "../../public/assets/camisetas/2.png";
+import camiseta3 from "../../public/assets/camisetas/3.png";
+import camiseta4 from "../../public/assets/camisetas/4.png";
 
 export default function Home() {
   return (
-    <main>
-      <Button>
-        Enviar
-        <span>Enviar</span>
-      </Button>
-    </main>
+    <HomeContainer>
+      <Product>
+        <ProductImg
+          src={camiseta2.src}
+          width={camiseta2.width}
+          height={camiseta2.height}
+          alt="camiseta 1"
+        />
+
+        <ProductFooter>
+          <ProductTitle>Camiseta 1</ProductTitle>
+          <ProductPrice>R$80.48</ProductPrice>
+        </ProductFooter>
+      </Product>
+
+      <Product>
+        <ProductImg
+          src={camiseta3.src}
+          width={camiseta3.width}
+          height={camiseta3.height}
+          alt="camiseta 1"
+        />
+
+        <ProductFooter>
+          <ProductTitle>Camiseta 1</ProductTitle>
+          <ProductPrice>R$80.48</ProductPrice>
+        </ProductFooter>
+      </Product>
+
+      <Product>
+        <ProductImg
+          src={camiseta4.src}
+          width={camiseta4.width}
+          height={camiseta4.height}
+          alt="camiseta 1"
+        />
+
+        <ProductFooter>
+          <ProductTitle>Camiseta 1</ProductTitle>
+          <ProductPrice>R$80.48</ProductPrice>
+        </ProductFooter>
+      </Product>
+    </HomeContainer>
   );
 }
