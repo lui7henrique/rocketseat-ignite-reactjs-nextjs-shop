@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { styled } from "styles";
 
 export const HomeContainer = styled("main", {
@@ -10,7 +11,7 @@ export const HomeContainer = styled("main", {
   marginLeft: "auto",
 });
 
-export const Product = styled("a", {
+export const Product = styled(Link, {
   background: "linear-gradient(180deg, #1EA483 0%, #7465D4 100%)",
   borderRadius: "4px",
 
@@ -55,6 +56,7 @@ export const ProductFooter = styled("footer", {
 
 export const ProductTitle = styled("strong", {
   fontSize: "$lg",
+  color: "$gray100",
 });
 
 export const ProductPrice = styled("span", {

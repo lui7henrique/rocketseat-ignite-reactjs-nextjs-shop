@@ -1,61 +1,14 @@
-import { useKeenSlider } from "keen-slider/react";
 import Stripe from "stripe";
 import { GetStaticProps } from "next";
 
 import { stripe } from "lib/stripe";
 
-import {
-  HomeContainer,
-  Product,
-  ProductFooter,
-  ProductImg,
-  ProductPrice,
-  ProductTitle,
-} from "styles/pages/home";
-
 import "keen-slider/keen-slider.min.css";
 import { formatCurrency } from "utils/currency/format";
+import { HomeTemplate, HomeTemplateProps } from "templates/Home";
 
-interface HomeProps {
-  products: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: number;
-  }[];
-}
-
-export default function Home(props: HomeProps) {
-  const { products } = props;
-
-  const [sliderRef] = useKeenSlider({
-    slides: { perView: 3, spacing: 48 },
-  });
-
-  return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
-      {products.map((product) => {
-        const { id, imageUrl, name, price } = product;
-
-        return (
-          <Product key={id} className="keen-slider__slide">
-            <ProductImg
-              src={imageUrl}
-              width={520}
-              height={480}
-              alt={name}
-              quality={100}
-            />
-
-            <ProductFooter>
-              <ProductTitle>{name}</ProductTitle>
-              <ProductPrice>{price}</ProductPrice>
-            </ProductFooter>
-          </Product>
-        );
-      })}
-    </HomeContainer>
-  );
+export default function Home(props: HomeTemplateProps) {
+  return <HomeTemplate {...props} />;
 }
 
 export const getStaticProps: GetStaticProps = async () => {
