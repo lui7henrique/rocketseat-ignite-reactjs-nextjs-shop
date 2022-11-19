@@ -1,4 +1,5 @@
 import { useKeenSlider } from "keen-slider/react";
+import { HomeProduct } from "types/product";
 
 import {
   HomeContainer,
@@ -10,12 +11,7 @@ import {
 } from "./styles";
 
 export type HomeTemplateProps = {
-  products: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: string;
-  }[];
+  products: HomeProduct[];
 };
 
 export const HomeTemplate = (props: HomeTemplateProps) => {

@@ -1,11 +1,13 @@
 import { stripe } from "lib/stripe";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Stripe from "stripe";
-import { ProductTemplate } from "templates/Product";
+import { ProductTemplate, ProductTemplateProps } from "templates/Product";
 import { formatCurrency } from "utils/currency/format";
 
-export default function Product() {
-  return <ProductTemplate />;
+export default function Product(props: ProductTemplateProps) {
+  console.log({ props });
+
+  return <ProductTemplate {...props} />;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -37,8 +39,9 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
           id: product.id,
           name: product.name,
           imageUrl: product.images[0],
-          price: formatCurrency(price ? Number(price) / 100 : 0),
+          price: formatCurrency(price ? Number(price.unit_amount) / 100 : 0),
           description: product.description,
+          defaultPriceId: price.id,
         },
       },
       revalidate: 60 * 60 * 1, // 1 hours

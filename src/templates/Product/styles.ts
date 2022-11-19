@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { styled } from "styles";
 
 export const ProductContainer = styled("main", {
@@ -25,6 +26,10 @@ export const ImageContainer = styled("div", {
   img: {
     objectFit: "cover",
   },
+});
+
+export const ProductImage = styled(Image, {
+  objectFit: "cover",
 });
 
 export const ProductDetails = styled("div", {
