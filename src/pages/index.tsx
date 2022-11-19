@@ -6,9 +6,18 @@ import { stripe } from "lib/stripe";
 import "keen-slider/keen-slider.min.css";
 import { formatCurrency } from "utils/currency/format";
 import { HomeTemplate, HomeTemplateProps } from "templates/Home";
+import Head from "next/head";
 
 export default function Home(props: HomeTemplateProps) {
-  return <HomeTemplate {...props} />;
+  return (
+    <>
+      <Head>
+        <title>Home | Ignite Shop</title>
+      </Head>
+
+      <HomeTemplate {...props} />
+    </>
+  );
 }
 
 export const getStaticProps: GetStaticProps = async () => {

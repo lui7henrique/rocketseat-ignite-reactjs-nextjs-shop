@@ -1,13 +1,20 @@
 import { stripe } from "lib/stripe";
 import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import Stripe from "stripe";
 import { ProductTemplate, ProductTemplateProps } from "templates/Product";
 import { formatCurrency } from "utils/currency/format";
 
 export default function Product(props: ProductTemplateProps) {
-  console.log({ props });
+  return (
+    <>
+      <Head>
+        <title>{props.product.name} | Ignite Shop</title>
+      </Head>
 
-  return <ProductTemplate {...props} />;
+      <ProductTemplate {...props} />
+    </>
+  );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
