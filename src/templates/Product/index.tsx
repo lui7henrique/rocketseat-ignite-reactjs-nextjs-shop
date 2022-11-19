@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useCallback, useState } from "react";
 import { Product } from "types/product";
 import * as S from "./styles";
 
@@ -5,9 +7,29 @@ export type ProductTemplateProps = {
   product: Product;
 };
 
-export const ProductTemplate = (props: ProductTemplateProps) => {
-  const { product } = props;
+export const ProductTemplate = ({ product }: ProductTemplateProps) => {
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
+    useState(false);
+
   const { name, price, imageUrl, description } = product;
+
+  const handleBuyButton = useCallback(async () => {
+    try {
+      setIsCreatingCheckoutSession(true);
+
+      const response = await axios.post("/api/checkout", {
+        priceId: product.defaultPriceId,
+      });
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+    } catch (err) {
+      setIsCreatingCheckoutSession(false);
+
+      alert("Falha ao redirecionar ao checkout!");
+    }
+  }, [product.defaultPriceId]);
 
   return (
     <S.ProductContainer>
@@ -22,12 +44,16 @@ export const ProductTemplate = (props: ProductTemplateProps) => {
       </S.ImageContainer>
 
       <S.ProductDetails>
-        <h1>{name}</h1>
-        <span>{price}</span>
+        <S.ProductName>{name}</S.ProductName>
+        <S.ProductPrice>{price}</S.ProductPrice>
+        <S.ProductDescription>{description}</S.ProductDescription>
 
-        <p>{description}</p>
-
-        <button>Comprar agora</button>
+        <S.ProductButtonCheckout
+          disabled={isCreatingCheckoutSession}
+          onClick={handleBuyButton}
+        >
+          Comprar agora
+        </S.ProductButtonCheckout>
       </S.ProductDetails>
     </S.ProductContainer>
   );
