@@ -52,14 +52,16 @@ export const ProductPrice = styled("span", {
 });
 
 export const ProductDescription = styled("p", {
-  marginTop: "2.5rem",
+  marginTop: "1rem",
   fontSize: "$md",
   lineHeight: 1.6,
   color: "$gray300",
 });
 
-export const ProductButtonCheckout = styled("button", {
-  marginTop: "auto",
+export const ProductButton = styled("button", {
+  display: "flex",
+  gap: "1rem",
+
   backgroundColor: "$green500",
   border: 0,
   color: "$white",
@@ -69,6 +71,8 @@ export const ProductButtonCheckout = styled("button", {
   fontWeight: "bold",
   fontSize: "$md",
 
+  transition: "all 0.2s",
+
   "&:disabled": {
     opacity: 0.6,
     cursor: "not-allowed",
@@ -77,4 +81,12 @@ export const ProductButtonCheckout = styled("button", {
   "&:hover": {
     backgroundColor: "$green300",
   },
+});
+
+export const ProductButtons = styled("div", {
+  width: "100%",
+  marginTop: "auto",
+  display: "flex",
+
+  gap: "1rem",
 });

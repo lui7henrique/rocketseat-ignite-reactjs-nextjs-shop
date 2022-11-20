@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useCallback, useState } from "react";
+import { FaCartPlus } from "react-icons/fa";
+
 import { Product } from "types/product";
+
 import * as S from "./styles";
 
 export type ProductTemplateProps = {
@@ -48,12 +51,22 @@ export const ProductTemplate = ({ product }: ProductTemplateProps) => {
         <S.ProductPrice>{price}</S.ProductPrice>
         <S.ProductDescription>{description}</S.ProductDescription>
 
-        <S.ProductButtonCheckout
-          disabled={isCreatingCheckoutSession}
-          onClick={handleBuyButton}
-        >
-          Comprar agora
-        </S.ProductButtonCheckout>
+        <S.ProductButtons>
+          <S.ProductButton
+            disabled={isCreatingCheckoutSession}
+            onClick={handleBuyButton}
+          >
+            Comprar agora
+          </S.ProductButton>
+
+          <S.ProductButton
+            onClick={handleBuyButton}
+            disabled={isCreatingCheckoutSession}
+          >
+            <FaCartPlus size={24} />
+            Adicionar ao carrinho
+          </S.ProductButton>
+        </S.ProductButtons>
       </S.ProductDetails>
     </S.ProductContainer>
   );

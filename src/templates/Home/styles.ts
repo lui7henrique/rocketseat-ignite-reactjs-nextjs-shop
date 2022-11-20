@@ -37,10 +37,11 @@ export const ProductImg = styled(Image, {
 
 export const ProductFooter = styled("footer", {
   position: "absolute",
-  bottom: "0.25rem",
-  left: "0.25rem",
-  right: "0.25rem",
-  padding: "2rem",
+  bottom: "1rem",
+  left: "1rem",
+  right: "1rem",
+
+  padding: "1rem",
 
   borderRadius: 6,
 
@@ -50,17 +51,17 @@ export const ProductFooter = styled("footer", {
 
   backgroundColor: "rgba(0, 0, 0, 0.6)",
 
-  transform: "translateY(110%)",
+  transform: "translateY(150%)",
   transition: "all 0.3s",
 });
 
 export const ProductTitle = styled("strong", {
-  fontSize: "$lg",
+  fontSize: "$md",
   color: "$gray100",
 });
 
 export const ProductPrice = styled("span", {
-  fontSize: "$xl",
+  fontSize: "$md",
   fontWeight: "bold",
   color: "$green300",
 });
