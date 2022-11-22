@@ -9,7 +9,9 @@ export type CartContextType = {
   cart: Cart;
 
   handleOpenCart: () => void;
+  handleCloseCart: () => void;
 
   handleBuyProduct: (defaultPriceId: string) => Promise<void>;
   handleAddProductToCart: (product: CartProduct) => void;
+  handleRemoveProductFromCart: (index: number) => void;
 };

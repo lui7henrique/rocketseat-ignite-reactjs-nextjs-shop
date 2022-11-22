@@ -67,16 +67,28 @@ export const CartContextProvider = (props: CartContextProviderProps) => {
     handleOpenCart();
   };
 
+  const handleRemoveProductFromCart = (index: number) => {
+    setCart((prevState) => {
+      const newState = prevState.filter(
+        (_, elementIndex) => elementIndex !== index
+      );
+
+      return newState;
+    });
+  };
+
   return (
     <CartContext.Provider
       value={{
         cart,
 
         handleOpenCart,
+        handleCloseCart,
 
         isCreatingCheckoutSession,
 
         handleAddProductToCart,
+        handleRemoveProductFromCart,
         handleBuyProduct,
       }}
     >
