@@ -60,6 +60,7 @@ export const ProductDescription = styled("p", {
 
 export const ProductButton = styled("button", {
   display: "flex",
+  justifyContent: "center",
   gap: "1rem",
 
   backgroundColor: "$green500",
@@ -72,6 +73,7 @@ export const ProductButton = styled("button", {
   fontSize: "$md",
 
   transition: "all 0.2s",
+  marginTop: "auto",
 
   "&:disabled": {
     opacity: 0.6,

@@ -1,3 +1,4 @@
+import { useCart } from "context/cart";
 import { useKeenSlider } from "keen-slider/react";
 import { HomeProduct } from "types/product";
 

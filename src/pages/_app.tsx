@@ -1,5 +1,6 @@
+import { Header } from "components/Header";
+import { AppProvider } from "context";
 import type { AppProps } from "next/app";
-import Image from "next/image";
 import { styled } from "styles";
 import { globalStyles } from "../styles/global";
 
@@ -13,21 +14,14 @@ export const Container = styled("div", {
   minHeight: "100vh",
 });
 
-export const Header = styled("header", {
-  padding: "2rem 0",
-  width: "100%",
-  maxWidth: 1180,
-  margin: "0 auto",
-});
-
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Container>
-      <Header>
-        <Image src="/assets/logo.svg" alt="logo" width="130" height="50" />
-      </Header>
+      <AppProvider>
+        <Header />
 
-      <Component {...pageProps} />
+        <Component {...pageProps} />
+      </AppProvider>
     </Container>
   );
 }
