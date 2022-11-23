@@ -35,39 +35,40 @@ export const CartContextProvider = (props: CartContextProviderProps) => {
     setCartIsOpen(false);
   }, []);
 
-  // const handleToggleDrawer = useCallback(() => {
-  //   setDrawerIsOpen((prevState) => !prevState);
-  // }, []);
-
-  const handleBuyProduct = useCallback(async (defaultPriceId: string) => {
+  const handleBuyCartProducts = useCallback(async () => {
     try {
       setIsCreatingCheckoutSession(true);
 
-      const response = await axios.post("/api/checkout", {
-        priceId: defaultPriceId,
+      const productsDefaultPricesIds = cart.map(
+        (product) => product.defaultPriceId
+      );
+
+      const { data } = await axios.post("/api/checkout", {
+        productsDefaultPricesIds,
       });
 
-      const { checkoutUrl } = response.data;
-
-      window.location.href = checkoutUrl;
-    } catch (err) {
+      window.location.href = data.checkoutUrl;
+    } catch {
       setIsCreatingCheckoutSession(false);
-
-      alert("Falha ao redirecionar ao checkout!");
+    } finally {
+      setIsCreatingCheckoutSession(false);
     }
-  }, []);
+  }, [cart]);
 
-  const handleAddProductToCart = (product: CartProduct) => {
-    setCart((prevState) => {
-      const newState = [...prevState, product];
+  const handleAddProductToCart = useCallback(
+    (product: CartProduct) => {
+      setCart((prevState) => {
+        const newState = [...prevState, product];
 
-      return newState;
-    });
+        return newState;
+      });
 
-    handleOpenCart();
-  };
+      handleOpenCart();
+    },
+    [handleOpenCart]
+  );
 
-  const handleRemoveProductFromCart = (index: number) => {
+  const handleRemoveProductFromCart = useCallback((index: number) => {
     setCart((prevState) => {
       const newState = prevState.filter(
         (_, elementIndex) => elementIndex !== index
@@ -75,7 +76,7 @@ export const CartContextProvider = (props: CartContextProviderProps) => {
 
       return newState;
     });
-  };
+  }, []);
 
   return (
     <CartContext.Provider
@@ -89,7 +90,7 @@ export const CartContextProvider = (props: CartContextProviderProps) => {
 
         handleAddProductToCart,
         handleRemoveProductFromCart,
-        handleBuyProduct,
+        handleBuyCartProducts,
       }}
     >
       <CartDrawer isOpen={cartIsOpen} onClose={handleCloseCart} />

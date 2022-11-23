@@ -9,6 +9,7 @@ import "react-modern-drawer/dist/index.css";
 import { useCart } from "context/cart";
 import { reverseCurrency } from "utils/currency/reverse";
 import { formatCurrency } from "utils/currency/format";
+import { Button } from "components/Button";
 
 type CartDrawerProps = {
   isOpen: boolean;
@@ -18,7 +19,14 @@ type CartDrawerProps = {
 export const CartDrawer = (props: CartDrawerProps) => {
   const { isOpen, onClose } = props;
 
-  const { cart, handleCloseCart, handleRemoveProductFromCart } = useCart();
+  const {
+    cart,
+    isCreatingCheckoutSession,
+
+    handleCloseCart,
+    handleRemoveProductFromCart,
+    handleBuyCartProducts,
+  } = useCart();
 
   const totalValue = useMemo(
     () => cart.reduce((acc, value) => acc + reverseCurrency(value.price), 0),
@@ -72,15 +80,25 @@ export const CartDrawer = (props: CartDrawerProps) => {
         </S.Body>
 
         <S.Footer>
-          <S.FooterInfo>
-            <S.Label>Quantidade</S.Label>
-            <S.Label>{cart.length} itens</S.Label>
-          </S.FooterInfo>
+          <S.FooterInfos>
+            <S.FooterInfo>
+              <S.Label>Quantidade</S.Label>
+              <S.Label>{cart.length} itens</S.Label>
+            </S.FooterInfo>
 
-          <S.FooterInfo>
-            <S.Label>Valor</S.Label>
-            <S.Label>{formatCurrency(totalValue)}</S.Label>
-          </S.FooterInfo>
+            <S.FooterInfo>
+              <S.Label>Valor</S.Label>
+              <S.Label>{formatCurrency(totalValue)}</S.Label>
+            </S.FooterInfo>
+          </S.FooterInfos>
+
+          <Button
+            isLoading={isCreatingCheckoutSession}
+            disabled={!cart.length}
+            onClick={handleBuyCartProducts}
+          >
+            Finalizar compra
+          </Button>
         </S.Footer>
       </S.Container>
     </Drawer>

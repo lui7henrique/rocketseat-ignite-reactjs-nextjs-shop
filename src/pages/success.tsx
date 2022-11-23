@@ -38,19 +38,19 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     ? session.customer_details.name
     : "usuário desconhecido";
 
-  const product =
-    session.line_items?.data[0].price &&
-    (session.line_items.data[0].price.product as Stripe.Product);
+  const products = session.line_items?.data.map(({ price }) => {
+    const product = price?.product as Stripe.Product;
+
+    return {
+      name: product.name,
+      imageUrl: product.images[0],
+    };
+  });
 
   return {
     props: {
       customerName,
-      product: product
-        ? {
-            name: product.name,
-            imageUrl: product.images[0],
-          }
-        : undefined,
+      products: products ?? undefined,
     },
   };
 };

@@ -17,6 +17,10 @@ export const Body = styled("div", {});
 
 export const Footer = styled("footer", {});
 
+export const FooterInfos = styled("div", {
+  marginBottom: "3.5rem",
+});
+
 export const FooterInfo = styled("div", {
   width: "100%",
 

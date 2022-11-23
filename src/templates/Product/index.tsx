@@ -1,3 +1,4 @@
+import { Button } from "components/Button";
 import { useCart } from "context/cart";
 
 import { FaCartPlus } from "react-icons/fa";
@@ -11,15 +12,9 @@ export type ProductTemplateProps = {
 };
 
 export const ProductTemplate = ({ product }: ProductTemplateProps) => {
-  const { name, price, imageUrl, description, defaultPriceId } = product;
+  const { name, price, imageUrl, description } = product;
 
-  console.log({ product });
-
-  const {
-    isCreatingCheckoutSession,
-    handleBuyProduct,
-    handleAddProductToCart,
-  } = useCart();
+  const { handleAddProductToCart } = useCart();
 
   return (
     <S.ProductContainer>
@@ -38,22 +33,10 @@ export const ProductTemplate = ({ product }: ProductTemplateProps) => {
         <S.ProductPrice>{price}</S.ProductPrice>
         <S.ProductDescription>{description}</S.ProductDescription>
 
-        <S.ProductButton
-          onClick={() => handleAddProductToCart(product)}
-          disabled={isCreatingCheckoutSession}
-        >
+        <Button onClick={() => handleAddProductToCart(product)}>
           <FaCartPlus size={24} />
           Adicionar ao carrinho
-        </S.ProductButton>
-
-        {/* <S.ProductButtons>
-          <S.ProductButton
-            disabled={isCreatingCheckoutSession}
-            onClick={() => handleBuyProduct(defaultPriceId)}
-          >
-            Comprar agora
-          </S.ProductButton>
-        </S.ProductButtons> */}
+        </Button>
       </S.ProductDetails>
     </S.ProductContainer>
   );
