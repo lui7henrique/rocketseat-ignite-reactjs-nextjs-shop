@@ -13,7 +13,9 @@ export const Container = styled("div", {
   justifyContent: "space-between",
 });
 
-export const Body = styled("div", {});
+export const Body = styled("div", {
+  height: "80%",
+});
 
 export const Footer = styled("footer", {});
 
@@ -64,6 +66,30 @@ export const CartProducts = styled("div", {
   display: "flex",
   flexDirection: "column",
   gap: "1.5rem",
+
+  height: "85%",
+  overflowY: "scroll",
+
+  "&::-webkit-scrollbar": {
+    width: "5px",
+  },
+
+  borderWidth: "1px",
+  borderColor: "$gray600",
+  borderStyle: "solid",
+
+  padding: "1rem",
+
+  // "&::-webkit-scrollbar-track": {
+  //   background: "$gray900",
+  // },
+
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: "$gray900",
+    borderRadius: "0px",
+    width: "5px",
+    // border: 3px solid ${({ theme }) => theme.colors.primary};
+  },
 });
 
 export const CartProduct = styled("div", {
